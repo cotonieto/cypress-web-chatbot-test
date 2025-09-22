@@ -1,0 +1,133 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 2,
+    "passes": 1,
+    "pending": 0,
+    "failures": 1,
+    "start": "2025-09-21T15:57:56.883Z",
+    "end": "2025-09-21T15:58:14.219Z",
+    "duration": 17336,
+    "testsRegistered": 2,
+    "passPercent": 50,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "d42d8d32-b4ba-4d2a-b914-0740d09c8a8c",
+      "title": "",
+      "fullFile": "cypress\\e2e\\web\\login.cy.js",
+      "file": "cypress\\e2e\\web\\login.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "c999f394-927f-4078-a4df-7d29ee00c6b6",
+          "title": "OrangeHRM - Login",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Should not login with invalid credentials",
+              "fullTitle": "OrangeHRM - Login Should not login with invalid credentials",
+              "timedOut": null,
+              "duration": 11661,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "cy.fixture('user').then(user => {\n  _LoginPage.default.login(user.invalidUser.username, user.invalidUser.password);\n  _LoginPage.default.elements.errorMessage().should('be.visible');\n});",
+              "err": {
+                "message": "TypeError: _LoginPage.default.elements.errorMessage is not a function",
+                "estack": "TypeError: _LoginPage.default.elements.errorMessage is not a function\n    at Context.eval (webpack://cypress-project/./cypress/e2e/web/login.cy.js:11:31)",
+                "diff": null
+              },
+              "uuid": "28c4ffb6-ea41-4b4c-81ba-b421e1cf2a10",
+              "parentUUID": "c999f394-927f-4078-a4df-7d29ee00c6b6",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "SHould login successfully with valid credentials",
+              "fullTitle": "OrangeHRM - Login SHould login successfully with valid credentials",
+              "timedOut": null,
+              "duration": 5590,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.fixture('user').then(user => {\n  _LoginPage.default.login(user.validUser.username, user.validUser.password);\n  cy.url().should('include', '/dashboard');\n});",
+              "err": {},
+              "uuid": "f9dc8786-6a51-49c3-8a3a-93b2d994f35c",
+              "parentUUID": "c999f394-927f-4078-a4df-7d29ee00c6b6",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "f9dc8786-6a51-49c3-8a3a-93b2d994f35c"
+          ],
+          "failures": [
+            "28c4ffb6-ea41-4b4c-81ba-b421e1cf2a10"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 17251,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.4"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/reports",
+        "overwrite": false,
+        "html": false,
+        "json": true,
+        "charts": true,
+        "embeddedScreenshots": true,
+        "inlineAssets": true,
+        "timestamp": "mmddyyyy_HHMMss"
+      },
+      "version": "6.3.0"
+    }
+  }
+}

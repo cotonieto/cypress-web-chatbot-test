@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Iframe Bot</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 10px; }
+    #chat { border: 1px solid #ccc; height: 400px; overflow-y: auto; padding: 5px; margin-bottom: 5px; }
+    input, button { padding: 5px; font-size: 16px; }
+    .bot-response { color: blue; margin-top: 5px; }
+  </style>
+</head>
+<body>
+  <div id="chat"></div>
+  <input type="text" name="message" placeholder="Escribe tu mensaje"/>
+  <button type="submit">Enviar</button>
+
+  <script>
+    const input = document.querySelector('input[name="message"]');
+    const button = document.querySelector('button[type="submit"]');
+    const chat = document.getElementById('chat');
+
+    // Bot de ejemplo
+    function botReply(message) {
+      const response = document.createElement('div');
+      response.className = 'bot-response';
+      response.textContent = message === 'Hola' ? 'Hola! ¿Cómo estás?' : 'No entendí tu mensaje.';
+      chat.appendChild(response);
+      chat.scrollTop = chat.scrollHeight;
+    }
+
+    button.addEventListener('click', () => {
+      const userMessage = input.value.trim();
+      if (!userMessage) return;
+
+      // Mostrar mensaje del usuario
+      const userDiv = document.createElement('div');
+      userDiv.textContent = userMessage;
+      chat.appendChild(userDiv);
+
+      // Limpiar input
+      input.value = '';
+
+      // Respuesta del bot
+      setTimeout(() => botReply(userMessage), 500);
+    });
+  </script>
+</body>
+</html>
+

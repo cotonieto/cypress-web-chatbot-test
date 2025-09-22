@@ -1,0 +1,223 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 7,
+    "passes": 7,
+    "pending": 0,
+    "failures": 0,
+    "start": "2025-09-21T15:58:33.093Z",
+    "end": "2025-09-21T15:59:38.845Z",
+    "duration": 65752,
+    "testsRegistered": 7,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "137c4cb0-dc08-4238-9d95-582ed0c7c78d",
+      "title": "",
+      "fullFile": "cypress\\e2e\\web\\orangehrm.cy.js",
+      "file": "cypress\\e2e\\web\\orangehrm.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "d45c45a9-9657-4832-a120-6186b360c4e5",
+          "title": "OrangeHRM Automation Suite",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Invalid login should not access dashboard",
+              "fullTitle": "OrangeHRM Automation Suite Invalid login should not access dashboard",
+              "timedOut": null,
+              "duration": 12731,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.fixture('user').then(user => {\n  _LoginPage.default.login(user.invalidUser.username, user.invalidUser.password);\n  _LoginPage.default.elements.errorMsg().should('be.visible').and('contain', 'Invalid credentials');\n});",
+              "err": {},
+              "uuid": "ae4cb6c9-411f-4625-8263-670806a92597",
+              "parentUUID": "d45c45a9-9657-4832-a120-6186b360c4e5",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Valid login should access dashboard",
+              "fullTitle": "OrangeHRM Automation Suite Valid login should access dashboard",
+              "timedOut": null,
+              "duration": 4426,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.fixture('user').then(user => {\n  _LoginPage.default.login(user.validUser.username, user.validUser.password);\n  _DashboardPage.default.elements.dashboardHeader().should('contain', 'Dashboard');\n});",
+              "err": {},
+              "uuid": "84603ae1-b466-4fa2-a321-8147d584cbc1",
+              "parentUUID": "d45c45a9-9657-4832-a120-6186b360c4e5",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Access My Info section and verify Personal Details",
+              "fullTitle": "OrangeHRM Automation Suite Access My Info section and verify Personal Details",
+              "timedOut": null,
+              "duration": 6043,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.fixture('user').then(user => {\n  _LoginPage.default.login(user.validUser.username, user.validUser.password);\n  _DashboardPage.default.goToMyInfo();\n  _MyInfoPage.default.elements.personalDetailsHeader().should('contain', 'Personal Details');\n});",
+              "err": {},
+              "uuid": "07048bd9-4f28-4a37-b04e-1fb28c35cd4e",
+              "parentUUID": "d45c45a9-9657-4832-a120-6186b360c4e5",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Fill and save Personal Details",
+              "fullTitle": "OrangeHRM Automation Suite Fill and save Personal Details",
+              "timedOut": null,
+              "duration": 8907,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.fixture('personalDetails').then(data => {\n  _LoginPage.default.login('Admin', 'admin123');\n  _DashboardPage.default.goToMyInfo();\n  _MyInfoPage.default.fillPersonalDetails(data);\n});",
+              "err": {},
+              "uuid": "29fb96a2-76fa-42e5-844b-d804005cb729",
+              "parentUUID": "d45c45a9-9657-4832-a120-6186b360c4e5",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Fill and save Custom Fields",
+              "fullTitle": "OrangeHRM Automation Suite Fill and save Custom Fields",
+              "timedOut": null,
+              "duration": 6159,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.fixture('customFields').then(data => {\n  _LoginPage.default.login('Admin', 'admin123');\n  _DashboardPage.default.goToMyInfo();\n  _MyInfoPage.default.fillCustomFields(data);\n});",
+              "err": {},
+              "uuid": "84b50c01-4983-41b4-a55b-f0b9ab4c9d7e",
+              "parentUUID": "d45c45a9-9657-4832-a120-6186b360c4e5",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Handle Attachments actions",
+              "fullTitle": "OrangeHRM Automation Suite Handle Attachments actions",
+              "timedOut": null,
+              "duration": 16716,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const originalFile = 'testing-image.png';\nconst newFile = 'testing-image2.png';\n_LoginPage.default.login('Admin', 'admin123');\n_DashboardPage.default.goToMyInfo();\n// 1. Subir archivo original\n_AttachmentsPage.default.uploadFile(originalFile);\n// 2. Editar archivo con nuevo nombre\n_AttachmentsPage.default.editFile(newFile);\n// 3. Descargar archivo (opcional)\n_AttachmentsPage.default.downloadFile();\n// 4. Eliminar archivo nuevo\n_AttachmentsPage.default.deleteFile(newFile);",
+              "err": {},
+              "uuid": "29ed99a7-eb05-4e4d-92a7-76e44fe86b9a",
+              "parentUUID": "d45c45a9-9657-4832-a120-6186b360c4e5",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Logout from dashboard",
+              "fullTitle": "OrangeHRM Automation Suite Logout from dashboard",
+              "timedOut": null,
+              "duration": 10415,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "_LoginPage.default.login('Admin', 'admin123');\n// Esperar dashboard cargado\n_DashboardPage.default.elements.dashboardHeader().should('contain', 'Dashboard');\n// Abrir dropdown del usuario\ncy.get('span.oxd-userdropdown-tab').click();\n// Seleccionar Logout\ncy.get('a.oxd-userdropdown-link').contains('Logout').click();\n// Validar que regresó a login\ncy.url().should('include', '/auth/login');",
+              "err": {},
+              "uuid": "8db017c0-01f2-421f-bed9-dca6821ce263",
+              "parentUUID": "d45c45a9-9657-4832-a120-6186b360c4e5",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "ae4cb6c9-411f-4625-8263-670806a92597",
+            "84603ae1-b466-4fa2-a321-8147d584cbc1",
+            "07048bd9-4f28-4a37-b04e-1fb28c35cd4e",
+            "29fb96a2-76fa-42e5-844b-d804005cb729",
+            "84b50c01-4983-41b4-a55b-f0b9ab4c9d7e",
+            "29ed99a7-eb05-4e4d-92a7-76e44fe86b9a",
+            "8db017c0-01f2-421f-bed9-dca6821ce263"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 65397,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.4"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/reports",
+        "overwrite": false,
+        "html": false,
+        "json": true,
+        "charts": true,
+        "embeddedScreenshots": true,
+        "inlineAssets": true,
+        "timestamp": "mmddyyyy_HHMMss"
+      },
+      "version": "6.3.0"
+    }
+  }
+}

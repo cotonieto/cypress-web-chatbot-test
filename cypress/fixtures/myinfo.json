@@ -1,0 +1,13 @@
+{
+    "firstName": "Jontahan",
+    "middleName": "QA",
+    "lastName": "Tester",
+    "employeeId": "12345",
+    "otherId": "67890",
+    "licenseNumber": "DL123456",
+    "licenseExpiry": "2030-12-31",
+    "nationality": "Mexican",
+    "maritalStatus": "Single",
+    "dob": "1995-05-20",
+    "gender": "Male"
+}

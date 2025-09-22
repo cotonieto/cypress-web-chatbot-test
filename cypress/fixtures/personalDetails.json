@@ -1,0 +1,13 @@
+{
+  "firstName": "John",
+  "middleName": "A",
+  "lastName": "Doe",
+  "employeeId": "12345",
+  "otherId": "6789",
+  "licenseNumber": "DL123456",
+  "licenseExpiry": "2030-12-31",
+  "nationality": "American",
+  "maritalStatus": "Single",
+  "dateOfBirth": "1990-01-01",
+  "gender": "Male"
+}

@@ -1,0 +1,113 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 0,
+    "pending": 0,
+    "failures": 1,
+    "start": "2025-09-21T15:58:15.752Z",
+    "end": "2025-09-21T15:58:31.567Z",
+    "duration": 15815,
+    "testsRegistered": 1,
+    "passPercent": 0,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "27eb303a-1908-45f7-95ec-4e8b485bb1e5",
+      "title": "",
+      "fullFile": "cypress\\e2e\\web\\myinfo.cy.js",
+      "file": "cypress\\e2e\\web\\myinfo.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "78f31d0f-9a39-4d2e-979a-7991477fe94d",
+          "title": "OrangeHRM - My Info Flow",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Should update Personal Details in My Info Section",
+              "fullTitle": "OrangeHRM - My Info Flow Should update Personal Details in My Info Section",
+              "timedOut": null,
+              "duration": 15761,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "cy.fixture('myInfo').then(data => {\n  _MyInfoPage.default.goToMyInfo();\n  _MyInfoPage.default.fillPersonalDetails(data);\n  _MyInfoPage.default.save();\n  //Asertion of saving (i.e success message or persistent values)\n  cy.contains('Successfully Updated').should('be.visible');\n});",
+              "err": {
+                "message": "TypeError: _MyInfoPage.default.goToMyInfo is not a function",
+                "estack": "TypeError: _MyInfoPage.default.goToMyInfo is not a function\n    at Context.eval (webpack://cypress-project/./cypress/e2e/web/myinfo.cy.js:14:19)",
+                "diff": null
+              },
+              "uuid": "9fa59100-f7fc-4c15-b95b-70b766348e19",
+              "parentUUID": "78f31d0f-9a39-4d2e-979a-7991477fe94d",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [],
+          "failures": [
+            "9fa59100-f7fc-4c15-b95b-70b766348e19"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 15761,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.4"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/reports",
+        "overwrite": false,
+        "html": false,
+        "json": true,
+        "charts": true,
+        "embeddedScreenshots": true,
+        "inlineAssets": true,
+        "timestamp": "mmddyyyy_HHMMss"
+      },
+      "version": "6.3.0"
+    }
+  }
+}
