@@ -1,10 +1,15 @@
-
 Cypress Chatbot & OrangeHRM Tests
 
 
 
 
-Descripción
+
+
+
+
+
+
+📘 Descripción
 
 Este proyecto automatiza pruebas de:
 
@@ -49,7 +54,7 @@ Chatbot
 
 ⚠️ Antes de ejecutar las pruebas, levantar el servidor local:
 
-http-server -p 8080
+npm run start:chatbot
 
 
 Luego ejecutar:
@@ -64,7 +69,7 @@ npm test
 
 📊 Reportes
 
-Los reportes se generan en HTML y se almacenan en:
+Se genera un reporte HTML en:
 
 cypress/reports/index.html
 
@@ -122,6 +127,7 @@ jobs:
 📝 Scripts en package.json
 {
   "scripts": {
+    "start:chatbot": "http-server -p 8080",
     "test": "cypress run --spec 'cypress/e2e/chatbot/**/*.cy.js','cypress/e2e/orangehrm/**/*.cy.js'",
     "test:chatbot": "cypress run --spec 'cypress/e2e/chatbot/**/*.cy.js'",
     "test:orangehrm": "cypress run --spec 'cypress/e2e/orangehrm/**/*.cy.js'"
@@ -129,7 +135,9 @@ jobs:
 }
 
 
-npm run test:chatbot → Ejecuta pruebas del chatbot (requiere servidor local)
+npm run start:chatbot → Levanta el servidor local para el chatbot
+
+npm run test:chatbot → Ejecuta pruebas del chatbot
 
 npm run test:orangehrm → Ejecuta pruebas de OrangeHRM
 
@@ -145,3 +153,13 @@ cypress-web-chatbot-test/
 ├─ package.json
 ├─ cypress.config.js
 └─ README.md
+
+⚙️ Configuración de Cypress para estabilidad
+e2e: {
+  defaultCommandTimeout: 10000,
+  pageLoadTimeout: 60000,
+  retries: {
+    runMode: 2,   // reintenta tests fallidos en pipeline
+    openMode: 0
+  },
+}
