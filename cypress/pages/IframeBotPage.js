@@ -1,45 +1,54 @@
 // cypress/pages/IframeBotPage.js
 class IframeBotPage {
+  /**
+   * Visita la página principal que contiene el iframe del bot
+   */
   visit() {
-    cy.visit('/index.html');
+    cy.visit('http://localhost:8080/index.html'); // Asegúrate de que tu servidor sirva desde public/
   }
 
+  /**
+   * Obtiene el iframe del bot
+   */
   getIframe() {
-    return cy.get('#bot-iframe');
+    return cy.get('iframe#botFrame', { timeout: 20000 }).should('exist');
   }
 
-  getIframeBody() {
-    return this.getIframe()
-      .its('0.contentDocument.body')
-      .should('not.be.empty')
-      .then(cy.wrap);
+  /**
+   * Escribe un mensaje dentro del iframe y envía
+   * @param {string} msg
+   */
+  typeMessage(msg) {
+    this.getIframe().then($iframe => {
+      const body = $iframe.contents().find('body');
+
+      cy.wrap(body)
+        .find('input[name="message"]')
+        .clear()
+        .type(msg, { delay: 50 });
+
+      cy.wrap(body)
+        .find('button[type="submit"]')
+        .click();
+    });
   }
 
-  typeMessage(message) {
-    this.getIframeBody().find('input[name="message"]').type(message);
-  }
-
-  clickBotButton() {
-    this.getIframeBody().find('button[type="submit"]').click();
-  }
-
-  // Validar respuesta específica del bot
-  validateBotResponse(expected) {
-    this.getIframeBody()
-      .find('.bot-response', { timeout: 5000 }) // espera hasta 5s
-      .should('contain.text', expected);
-  }
-
-  // Obtener la última respuesta del bot
-  getBotResponse() {
-    return this.getIframeBody()
-      .find('.bot-response', { timeout: 5000 }) // espera a que exista
-      .last();
+  /**
+   * Obtiene la última respuesta del bot
+   */
+  getLastBotResponse() {
+    return this.getIframe().then($iframe => {
+      const body = $iframe.contents().find('body');
+      return cy.wrap(body)
+        .find('.bot-response')
+        .last();
+    });
   }
 }
 
-// ⚠️ Exportar con module.exports para require()
-module.exports = new IframeBotPage();
+export default new IframeBotPage();
+
+
 
 
 

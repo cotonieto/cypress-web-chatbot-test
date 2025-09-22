@@ -14,20 +14,18 @@ describe('Pruebas visuales con iframe bot', () => {
     IframeBotPage.getIframe().should('exist');
   });
 
-  it('Interactuar con el iframe y botones del bot', () => {
-    IframeBotPage.typeMessage('Hola');
-    IframeBotPage.clickBotButton();
-    IframeBotPage.validateBotResponse('Hola! ¿Cómo estás?'); // ✅ Espera a que aparezca
-  });
-
-  it('Ingresar y mandar mensaje "Hola"', () => {
-    IframeBotPage.typeMessage('Hola');
-    IframeBotPage.clickBotButton();
-  });
+ it('Interactuar con el iframe y botones del bot', () => {
+  IframeBotPage.typeMessage('Hola'); // Esto ya escribe y hace click en "Enviar"
+  IframeBotPage.getLastBotResponse().should('contain.text', 'Hola! ¿Cómo estás?');
+});
 
   it('Recibir respuesta del bot', () => {
-    IframeBotPage.typeMessage('Hola');
-    IframeBotPage.clickBotButton();
-    IframeBotPage.getBotResponse().should('contain.text', 'Hola! ¿Cómo estás?');
-  });
+  IframeBotPage.typeMessage('Hola'); // escribe y envía
+  IframeBotPage.getLastBotResponse().should('contain.text', 'Hola! ¿Cómo estás?');
+});
+
+it('Recibir respuesta del bot', () => {
+  IframeBotPage.typeMessage('Hola'); // escribe "Hola" y hace click en "Enviar"
+  IframeBotPage.getLastBotResponse().should('contain.text', 'Hola! ¿Cómo estás?');
+ });
 });

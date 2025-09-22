@@ -25,7 +25,7 @@ class MyInfoPage {
     maritalStatusDropdown: () =>
       cy.get('.oxd-input-group').contains('Marital Status').parents('.oxd-input-group').find('div.oxd-select-text'),
 
-    // Date of Birth (fix)
+    // Date of Birth
     dateOfBirth: () =>
       cy.get('.oxd-input-group').contains('Date of Birth').parents('.oxd-input-group').find('.oxd-date-input input'),
 
@@ -37,11 +37,12 @@ class MyInfoPage {
     saveBtn: () => cy.contains('button', 'Save'),
 
     // Custom fields
-     bloodTypeDropdown: () =>
-      cy.get('.oxd-input-group')
-        .contains('Blood Type')
+    bloodTypeDropdown: () =>
+      cy.get('.oxd-input-group', { timeout: 15000 }) // Aumentamos timeout
+        .contains('Blood Type', { timeout: 15000 })  // Espera explícita
         .parents('.oxd-input-group')
-        .find('div.oxd-select-text-input'),
+        .find('div.oxd-select-text-input')
+        .should('be.visible'), // Aseguramos visibilidad
     testFieldInput: () =>
       cy.get('.oxd-input-group')
         .contains('Test_Field')
@@ -78,10 +79,13 @@ class MyInfoPage {
 
   fillCustomFields(data) {
     // Blood Type dropdown
-    this.elements.bloodTypeDropdown().click();
-    cy.get('div.oxd-select-dropdown')
+    this.elements.bloodTypeDropdown().click({ force: true });
+
+    // Esperar que el dropdown se renderice y seleccionar valor
+    cy.get('div.oxd-select-dropdown', { timeout: 10000 })
+      .should('be.visible')
       .contains(data.bloodType)
-      .click();
+      .click({ force: true });
 
     // Test Field input
     this.elements.testFieldInput().clear().type(data.testField);
@@ -92,5 +96,4 @@ class MyInfoPage {
 }
 
 module.exports = new MyInfoPage();
-
 

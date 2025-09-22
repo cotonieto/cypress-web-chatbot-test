@@ -2,15 +2,17 @@ const { defineConfig } = require('cypress');
 const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
-const codeCoverageTask = require('@cypress/code-coverage/task'); // <-- Importar plugin de coverage
+const codeCoverageTask = require('@cypress/code-coverage/task'); // Plugin de coverage
 
 module.exports = defineConfig({
   e2e: {
     setupNodeEvents(on, config) {
-      // 🔹 Activar code coverage
-      codeCoverageTask(on, config);
+      // Activar code coverage solo si la app está instrumentada
+      if (process.env.CODE_COVERAGE === 'true') {
+        codeCoverageTask(on, config);
+      }
 
-      // 🔹 Generar fixtures automáticos antes de los tests
+      // Generar fixtures automáticos antes de los tests
       on('before:run', () => {
         const fixtures = [
           { name: 'testing-image.png' },
@@ -25,7 +27,7 @@ module.exports = defineConfig({
         });
       });
 
-      // 🔹 Generar reporte Mochawesome después de los tests
+      // Generar reporte Mochawesome después de los tests
       on('after:run', () => {
         try {
           execSync(
@@ -45,15 +47,16 @@ module.exports = defineConfig({
       return config;
     },
 
-    // 🔹 Configuración de specs y viewport
+    // Configuración general
     specPattern: 'cypress/e2e/**/*.cy.js',
-    baseUrl: 'http://localhost:8080',
     viewportWidth: 1280,
     viewportHeight: 720,
     video: false,
+
+    // ⚠️ Ya no definimos un baseUrl global
+    // Usaremos baseUrl dinámico por suite o CLI
   },
 
-  // 🔹 Reporter Mochawesome
   reporter: 'mochawesome',
   reporterOptions: {
     reportDir: 'cypress/reports',
@@ -66,5 +69,6 @@ module.exports = defineConfig({
     timestamp: "mmddyyyy_HHMMss"
   }
 });
+
 
 

@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Iframe Bot</title>
+  <title>Bot Content</title>
   <style>
     body { font-family: Arial, sans-serif; padding: 10px; }
     #chat { border: 1px solid #ccc; height: 400px; overflow-y: auto; padding: 5px; margin-bottom: 5px; }
@@ -20,7 +20,6 @@
     const button = document.querySelector('button[type="submit"]');
     const chat = document.getElementById('chat');
 
-    // Bot de ejemplo
     function botReply(message) {
       const response = document.createElement('div');
       response.className = 'bot-response';
@@ -33,18 +32,15 @@
       const userMessage = input.value.trim();
       if (!userMessage) return;
 
-      // Mostrar mensaje del usuario
       const userDiv = document.createElement('div');
       userDiv.textContent = userMessage;
       chat.appendChild(userDiv);
 
-      // Limpiar input
       input.value = '';
-
-      // Respuesta del bot
       setTimeout(() => botReply(userMessage), 500);
     });
   </script>
 </body>
 </html>
+
 

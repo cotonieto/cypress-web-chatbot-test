@@ -5,7 +5,7 @@ import AttachmentsPage from '../../pages/AttachmentsPage';
 
 describe('OrangeHRM Automation Suite', () => {
   beforeEach(() => {
-    cy.visit('/auth/login');
+    cy.visit('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login');
   });
 
   it('Invalid login should not access dashboard', () => {
@@ -55,34 +55,17 @@ describe('OrangeHRM Automation Suite', () => {
     LoginPage.login('Admin', 'admin123');
     DashboardPage.goToMyInfo();
 
-    // 1. Subir archivo original
     AttachmentsPage.uploadFile(originalFile);
-
-    // 2. Editar archivo con nuevo nombre
     AttachmentsPage.editFile(newFile);
-
-    // 3. Descargar archivo (opcional)
     AttachmentsPage.downloadFile();
-
-    // 4. Eliminar archivo nuevo
     AttachmentsPage.deleteFile(newFile);
   });
 
   it('Logout from dashboard', () => {
     LoginPage.login('Admin', 'admin123');
-
-    // Esperar dashboard cargado
     DashboardPage.elements.dashboardHeader().should('contain', 'Dashboard');
-
-    // Abrir dropdown del usuario
     cy.get('span.oxd-userdropdown-tab').click();
-
-    // Seleccionar Logout
-    cy.get('a.oxd-userdropdown-link')
-      .contains('Logout')
-      .click();
-
-    // Validar que regresó a login
+    cy.get('a.oxd-userdropdown-link').contains('Logout').click();
     cy.url().should('include', '/auth/login');
   });
 });
