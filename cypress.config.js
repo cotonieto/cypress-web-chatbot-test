@@ -53,7 +53,7 @@ module.exports = defineConfig({
     viewportHeight: 720,
     video: false,
 
-    // ⚠️ Ya no definimos un baseUrl global
+    // Ya no definimos un baseUrl global
     // Usaremos baseUrl dinámico por suite o CLI
   },
 
