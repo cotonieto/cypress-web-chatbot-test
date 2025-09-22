@@ -2,10 +2,14 @@ const { defineConfig } = require('cypress');
 const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
+const codeCoverageTask = require('@cypress/code-coverage/task'); // <-- Importar plugin de coverage
 
 module.exports = defineConfig({
   e2e: {
     setupNodeEvents(on, config) {
+      // 🔹 Activar code coverage
+      codeCoverageTask(on, config);
+
       // 🔹 Generar fixtures automáticos antes de los tests
       on('before:run', () => {
         const fixtures = [
@@ -17,7 +21,7 @@ module.exports = defineConfig({
         fixtures.forEach((file) => {
           const filePath = path.join(__dirname, 'cypress/fixtures', file.name);
           fs.writeFileSync(filePath, Buffer.from(pngBase64, 'base64'));
-          console.log(`✅ Fixture generado: ${filePath}`);
+          console.log(`Fixture generado: ${filePath}`);
         });
       });
 
@@ -32,9 +36,9 @@ module.exports = defineConfig({
             'npx mochawesome-report-generator cypress/reports/combined-report.json --reportDir cypress/reports --inline',
             { stdio: 'inherit', cwd: __dirname }
           );
-          console.log('✅ Reporte generado: cypress/reports/index.html');
+          console.log('Reporte generado: cypress/reports/index.html');
         } catch (error) {
-          console.log('⚠️ Error generando reporte:', error.message);
+          console.log('Error generando reporte:', error.message);
         }
       });
 
@@ -43,7 +47,7 @@ module.exports = defineConfig({
 
     // 🔹 Configuración de specs y viewport
     specPattern: 'cypress/e2e/**/*.cy.js',
-    baseUrl: 'http://localhost:8080', // 🔹 Cambio aquí para usar página local con iframe
+    baseUrl: 'http://localhost:8080',
     viewportWidth: 1280,
     viewportHeight: 720,
     video: false,

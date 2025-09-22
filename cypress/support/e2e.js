@@ -1,5 +1,6 @@
 // Este archivo se ejecuta en el navegador antes de los tests.
 //import 'cypress-mochawesome-reporter/register';
+import '@cypress/code-coverage/support';
 import './commands';
 
 // Limpiar localStorage antes de cada test
